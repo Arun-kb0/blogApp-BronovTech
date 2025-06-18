@@ -49,7 +49,7 @@ export const updatePost = async (req: Request, res: Response, next: NextFunction
     if (typeof id !== 'string') {
       throw new HttpError(httpStatus.BAD_REQUEST, 'id is required')
     }
-    const newPost = postModel.findOneAndUpdate(
+    const newPost = await postModel.findOneAndUpdate(
       { _id: id },
       { title, content },
       { new: true }
