@@ -10,9 +10,10 @@ export interface IPostDb {
 }
 
 const PostSchema = new mongoose.Schema<IPostDb>({
+  _id: { type: Schema.Types.ObjectId, auto: true },
   title: { type: String, required: true },
   content: { type: String, required: true },
-  author: { type: Schema.Types.ObjectId, required: true },
+  author: { type: Schema.Types.ObjectId, ref: 'users', required: true },
 }, { timestamps: true })
 
 const postModel = mongoose.model('posts', PostSchema)
