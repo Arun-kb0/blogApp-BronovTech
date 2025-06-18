@@ -5,6 +5,7 @@ import cors from 'cors'
 import connectDb from './config/connectDb'
 import httpLogger from './middleware/httpLogger'
 import errorHandler from './middleware/errorHandler'
+import authRouter from './routes/authRouter'
 
 const PORT = process.env.PORT || 3001
 const MONGO_DB_URI = process.env.MONGO_DB_URI || ''
@@ -18,6 +19,9 @@ app.use(httpLogger)
 app.get('/test', (req: Request, res: Response) => {
   res.json({ message: 'test route: server is running' })
 })
+
+
+app.use('/auth', authRouter)
 
 
 app.use(errorHandler)

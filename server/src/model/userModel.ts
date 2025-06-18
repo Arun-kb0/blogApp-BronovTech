@@ -2,6 +2,7 @@ import mongoose, { Types } from "mongoose"
 
 export interface IUserDb {
   _id: Types.ObjectId
+  name: string
   email: string
   password: string
   accessToken: string
@@ -10,6 +11,7 @@ export interface IUserDb {
 }
 
 const UserSchema = new mongoose.Schema<IUserDb>({
+  name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   accessToken: { type: String },
