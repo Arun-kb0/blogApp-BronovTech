@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 import express, { Request, Response } from 'express'
 import cors from 'cors'
+import connectDb from './config/connectDb'
 import httpLogger from './middleware/httpLogger'
 import errorHandler from './middleware/errorHandler'
 
@@ -18,8 +19,13 @@ app.get('/test', (req: Request, res: Response) => {
   res.json({ message: 'test route: server is running' })
 })
 
+
 app.use(errorHandler)
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
-})
+connectDb(MONGO_DB_URI)
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`)
+    })
+  })
+  .catch(error => console.log(error))
