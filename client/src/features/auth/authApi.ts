@@ -31,8 +31,8 @@ export const logout = createAsyncThunk('/logout', async (_, { dispatch, getState
     const dispatchFunction = dispatch as AppDispatch
     const accessToken = state.auth.accessToken
     const res = await axiosInstance.get(`/auth/logout?accessToken=${accessToken}`)
-    dispatchFunction(setAuthToInitState())
     localStorage.clear()
+    dispatchFunction(setAuthToInitState())
     return res.data
   } catch (error) {
     return errorHandler(error)

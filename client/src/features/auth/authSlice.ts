@@ -5,7 +5,7 @@ import { login, logout, signup } from "./authApi"
 import type { RootState } from "../../app/store"
 
 type AuthStateType = {
-  user: UserType | undefined
+  user: UserType | null
   accessToken: string | undefined
   status: StatusType
   logoutStatus: StatusType
@@ -17,7 +17,7 @@ const getUserFromStorage = () => {
     const userString = localStorage.getItem('user')
     if (!userString) return undefined
     const user = JSON.parse(userString)
-    return user ? user : undefined
+    return user ? user : null
   } catch (error) {
     return undefined
   }
@@ -87,7 +87,10 @@ const authSlice = createSlice({
       })
 
       .addCase(logout.fulfilled, (state) => {
-        
+        state.user = null;
+        state.accessToken = undefined;
+        state.status = 'idle';
+        state.error = undefined;
       })
       .addCase(logout.rejected, (state, action) => {
         state.error = action.error.message
