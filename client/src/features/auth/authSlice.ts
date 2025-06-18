@@ -61,10 +61,10 @@ const authSlice = createSlice({
       })
       .addCase(signup.fulfilled, (state, action: PayloadAction<{ user: UserType, accessToken: string }>) => {
         state.status = 'success'
-        const { user, accessToken } = action.payload
+        const { user } = action.payload
         state.user = user
-        state.accessToken = accessToken
-        setUserAndAccessTokenInStorage(user, accessToken)
+        state.accessToken = user.accessToken
+        setUserAndAccessTokenInStorage(user, user.accessToken)
       })
       .addCase(signup.rejected, (state, action) => {
         state.status = 'failed'
@@ -76,10 +76,10 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action: PayloadAction<{ user: UserType, accessToken: string }>) => {
         state.status = 'success'
-        const { user, accessToken } = action.payload
+        const { user } = action.payload
         state.user = user
-        state.accessToken = accessToken
-        setUserAndAccessTokenInStorage(user, accessToken)
+        state.accessToken = user.accessToken
+        setUserAndAccessTokenInStorage(user, user.accessToken)
       })
       .addCase(login.rejected, (state, action) => {
         state.status = 'failed'

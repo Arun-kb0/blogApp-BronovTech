@@ -35,7 +35,7 @@ const PostCard = ({ post }: Props) => {
             {post.title}
           </Typography>
           <Typography variant="p" className="mb-2 text-sm ">
-            author : {post.author.name}
+            author : {post?.author?.name ? post.author.name : ''}
           </Typography>
         </div>
       </CardHeader>

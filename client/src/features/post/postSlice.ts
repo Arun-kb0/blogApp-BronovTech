@@ -58,13 +58,13 @@ const post = createSlice({
         state.error = action.error.message
       })
 
-      .addCase(updatePost.fulfilled, (state, action: PayloadAction<postType>) => {
-        const updatedPost = action.payload
-        const index = state.posts.findIndex(item => item._id === updatedPost._id)
+      .addCase(updatePost.fulfilled, (state, action: PayloadAction<{ post: postType }>) => {
+        const { post } = action.payload
+        const index = state.posts.findIndex(item => item._id === post._id)
         if (index !== -1) {
-          state.posts[index] = updatedPost
+          state.posts[index] = post
         } else {
-          state.posts.push(updatedPost)
+          state.posts.push(post)
         }
       })
       .addCase(updatePost.rejected, (state, action) => {

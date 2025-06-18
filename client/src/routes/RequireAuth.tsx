@@ -9,15 +9,15 @@ const RequireAuth = () => {
 
 
   if (status === 'loading') {
-    return <div>Loading...</div>; // Display a loading spinner or message
+    return <div>Loading...</div>
   }
 
   if (status === 'failed') {
-    return <Navigate to="/login" replace />; // Redirect only when authentication fails
+    return <Navigate to="/login" replace />
   }
 
-  if (status === 'success' && user) {
-    return <Outlet />;
+  if (user) {
+    return <Outlet />
   }
 
   return <Navigate to="/login" replace />;

@@ -47,6 +47,7 @@ export const updatePost = createAsyncThunk('/update-post', async (data: UpdatePo
         Authorization: `Bearer ${accessToken}`,
       },
     })
+    console.log(res.data)
     return res.data
   } catch (error) {
     return errorHandler(error)
